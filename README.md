@@ -15,7 +15,7 @@ The goal of this project is not to ship a full production application, but to:
 ## Focus Areas
 
 1. **Problem & Solution**
-   Why traditional rule-based systems fail for conversational workflows and how AI agents solve this using reasoning + tools.
+   Why traditional rule-based systems fail for conversational workflows and how AI agents solve this using reasoning and tools.
 
 2. **Technical Implementation**
    How Amazon Bedrock, Strands Agents, DynamoDB, and supporting AWS services work together.
@@ -23,15 +23,9 @@ The goal of this project is not to ship a full production application, but to:
 3. **Scaling Strategy**
    How the system performs today and how it can scale using AWS-native patterns.
 
-4. **Visual Documentation**
-   Architecture diagrams, agent flow diagrams, screenshots, and demo recordings.
-
-5. **Code & Resources**
-   Clean, minimal code examples linked directly to the blog.
-
 ---
 
-## Architecture Summary
+## Architecture
 
 **Core components:**
 
@@ -84,50 +78,19 @@ The agent uses natural language reasoning to decide **when to retrieve knowledge
 ## How This Repo Is Meant to Be Used
 
 This repository is intentionally **lightweight and educational**:
-
 * Code snippets are optimized for **clarity**, not feature completeness
 * Infrastructure is optional and kept minimal
-* Each file maps directly to a **section in the blog post**
 
 Readers are encouraged to:
-
 * Fork the repo
 * Modify tools and prompts
 * Swap in their own use cases
 
 ---
 
-## Running the Demo (Optional)
-
-> This step is optional and not required to understand the blog.
-
-```bash
-pip install -r requirements.txt
-python src/app.py
-```
-
-You can invoke the agent locally and inspect how it reasons and calls tools.
-
----
-
-## Visual Assets
-
-The following assets are referenced in the blog post:
-
-* Architecture diagram (PNG/SVG)
-* Agent reasoning flow diagram
-* Code screenshots
-* Demo conversation GIF
-* Metrics screenshots (latency, token usage)
-
-All visuals are stored in the `/diagrams` and `/demo` directories.
-
----
-
 ## Scaling & Production Notes
 
 While this project is a prototype, the blog explains how to scale it using:
-
 * AWS Fargate auto-scaling
 * DynamoDB on-demand capacity
 * Caching for retrieval results
@@ -136,29 +99,8 @@ While this project is a prototype, the blog explains how to scale it using:
 
 ---
 
-## Related Blog Post
-
-📖 **AWS Builder Center Blog:**
-
-> *Build an Intelligent AI Agent with Amazon Bedrock & Strands*
-
-(Link will be added once published)
-
----
-
 ## Disclaimer
 
 This project is for **educational and demonstration purposes** only. It is not an official AWS product and should not be used in production without proper security, testing, and cost controls.
 
 ---
-
-## Author
-
-**Anushka Banerjee**
-Cloud & AI Developer | AWS Builder
-
----
-
-## License
-
-MIT License
