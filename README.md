@@ -1,30 +1,164 @@
-# Getting started with Strands SDK
+# Build an AI-powered Restaurant Booking Assistant with Amazon Bedrock & Strands Agents
 
-In this folder we will provide Jupyter Notebook examples on how to get started with different Strands Agents functionalities.
+Built an AI-powered restaurant booking assistant that understands natural-language requests, retrieves contextual restaurant data, and performs booking actions (create, read, delete) by orchestrating LLM reasoning with simple cloud tools. This project demonstrates how to design, implement, and scale the agent using the Strands Agents SDK running on a Bedrock foundation model, Bedrock Knowledge Bases for retrieval, DynamoDB for bookings, and optional serverless or container deployments (Lambda or Fargate) for production scale.
 
-## Fundamentals
-| Example | Description                                                                        | Features showcased                                                                                   |
-|---------|------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------|
-| F1      | [Creating First Strands Agent](01-fundamentals/01-first-agent)                     | Agent initialization, usage of a default tool, creation of custom tools                              |
-| F2      | [Model Providers - OpenAI](01-fundamentals/02-model-providers/02-openai-model)     | Create agent with GPT 4.0 as model                                                                   |
-| F2      | [Model Providers - Ollama](01-fundamentals/02-model-providers/01-ollama-model)     | Create agent with Ollama model                                                                       |
-| F3      | [Connecting with AWS services](01-fundamentals/03-connecting-with-aws-services)    | Connecting to Amazon Bedrock Knowledge Base and Amazon DynamoDB                                      |
-| F4      | [Tools - Using MCP tools](01-fundamentals/04-tools/01-using-mcp-tools)                     | Integrating MCP tool calling to your agent                                                           |
-| F4      | [Tools - Custom Tools](01-fundamentals/04-tools/02-custom-tools)                           | Creating and using custom tools with your agent                                                      |
-| F5      | [Streaming response from agent](01-fundamentals/05-streaming-agent-response)       | Streaming your agent's response using Async Iterators or Callbacks (Stream Handlers)                 |
-| F6      | [Integrating Bedrock Guardrail](01-fundamentals/06-guardrail-integration)          | Integrate an Amazon Bedrock Guardrail to your agent                                                  |
-| F7      | [Adding memory to your agent](01-fundamentals/07-memory-persistent-agents)         | Personal assistant using memory and websearch tools                                                  |
-| F8     | [Observability and Evaluation](01-fundamentals/08-observability-and-evaluation)    | Adding observability and evaluation to your agent                                                    |
+## Overview
 
-## Multi-Agent Systems
-| Example | Description                                                | Features showcased                                                                                   |
-|---------|------------------------------------------------------------|-----------------------------------------------------------------------------------------------------|
-| M1      | [Using Agent as tool](02-multi-agent-systems/01-agent-as-tool) | Create a multi-agent collaboration example using an agent as tool                                |
-| M2      | [Creating a Swarm Agent](02-multi-agent-systems/02-swarm-agent) | Create a multi-agent system consisting of multiple AI agents working together                   |
-| M3      | [Creating a Graph Agent](02-multi-agent-systems/03-graph-agent) | Create a structured network of specialized AI agents with defined communication patterns         |
+The goal of this project is not to ship a full production application, but to:
+* Showcase a **real-world AI agent use case**
+* Explain **AWS architectural decisions** clearly
+* Provide **reproducible code and visuals** for readers
+* Serve as a reference implementation for developers building agent-based systems
 
-## Deployment
-| Example | Description                                                      | Features showcased                                                                              |
-|---------|------------------------------------------------------------------|------------------------------------------------------------------------------------------------|
-| D1      | [AWS Lambda Deployment](03-deployment/01-lambda-deployment)       | Deploying your agent to an AWS Lambda Function                                                  |
-| D2      | [AWS Fargate Deployment](03-deployment/02-fargate-deployment)     | Deploying your agent to AWS Fargate                                                             |
+---
+
+## Focus Areas
+
+1. **Problem & Solution**
+   Why traditional rule-based systems fail for conversational workflows and how AI agents solve this using reasoning + tools.
+
+2. **Technical Implementation**
+   How Amazon Bedrock, Strands Agents, DynamoDB, and supporting AWS services work together.
+
+3. **Scaling Strategy**
+   How the system performs today and how it can scale using AWS-native patterns.
+
+4. **Visual Documentation**
+   Architecture diagrams, agent flow diagrams, screenshots, and demo recordings.
+
+5. **Code & Resources**
+   Clean, minimal code examples linked directly to the blog.
+
+---
+
+## Architecture Summary
+
+**Core components:**
+
+* **Amazon Bedrock** – Foundation model inference
+* **Strands Agents SDK** – Agent orchestration and tool calling
+* **Amazon DynamoDB** – Persistent storage for agent actions
+* **Amazon S3** – Knowledge base documents
+* **AWS Lambda / Fargate** – Agent runtime
+* **OpenTelemetry / CloudWatch** – Observability
+
+The agent uses natural language reasoning to decide **when to retrieve knowledge** and **when to invoke tools**, keeping business logic explicit and auditable.
+
+---
+
+## Repository Structure
+
+```
+.
+├── 01-tutorials/
+│   ├── 01-fundamentals/
+│   │   ├── 01-first-agent/
+│   │   ├── 02-model-providers/
+│   │   ├── 03-connecting-with-aws-services/
+│   │   ├── 04-tools/
+│   │   ├── 05-advance-processing-agent-response/
+│   │   ├── 06-guardrail-integration/
+│   │   ├── 07-memory-persistent-agents/
+│   │   ├── 08-observability-and-evaluation/
+│   │   └── 09-bidirectional-streaming/
+│   │               
+│   ├── 02-multi-agent-systems/
+│   │   ├── 01-agent-as-tool/
+│   │   ├── 02-swarm-agent/
+│   │   └── 03-graph-agent/
+│   │
+│   └── 03-deployments/
+│       ├── 01-lambda-deployment/
+│       ├── 02-fargate-deployment/
+│       └── 03-agentcore-deployment/
+│
+├── 02-samples/
+│   ├── 01-restaurant-assistant/
+│   └── 05-personal-assistant/
+│                      
+└── README.md                   
+```
+
+---
+
+## How This Repo Is Meant to Be Used
+
+This repository is intentionally **lightweight and educational**:
+
+* Code snippets are optimized for **clarity**, not feature completeness
+* Infrastructure is optional and kept minimal
+* Each file maps directly to a **section in the blog post**
+
+Readers are encouraged to:
+
+* Fork the repo
+* Modify tools and prompts
+* Swap in their own use cases
+
+---
+
+## Running the Demo (Optional)
+
+> This step is optional and not required to understand the blog.
+
+```bash
+pip install -r requirements.txt
+python src/app.py
+```
+
+You can invoke the agent locally and inspect how it reasons and calls tools.
+
+---
+
+## Visual Assets
+
+The following assets are referenced in the blog post:
+
+* Architecture diagram (PNG/SVG)
+* Agent reasoning flow diagram
+* Code screenshots
+* Demo conversation GIF
+* Metrics screenshots (latency, token usage)
+
+All visuals are stored in the `/diagrams` and `/demo` directories.
+
+---
+
+## Scaling & Production Notes
+
+While this project is a prototype, the blog explains how to scale it using:
+
+* AWS Fargate auto-scaling
+* DynamoDB on-demand capacity
+* Caching for retrieval results
+* Cost controls for LLM inference
+* Guardrails and IAM-based security
+
+---
+
+## Related Blog Post
+
+📖 **AWS Builder Center Blog:**
+
+> *Build an Intelligent AI Agent with Amazon Bedrock & Strands*
+
+(Link will be added once published)
+
+---
+
+## Disclaimer
+
+This project is for **educational and demonstration purposes** only. It is not an official AWS product and should not be used in production without proper security, testing, and cost controls.
+
+---
+
+## Author
+
+**Anushka Banerjee**
+Cloud & AI Developer | AWS Builder
+
+---
+
+## License
+
+MIT License
